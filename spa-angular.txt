@@ -1,0 +1,110 @@
+app.js:
+const exemploApp = angular.module('exemploApp', ['ngRoute']);
+
+index.html:
+<!DOCTYPE html>
+<!-- define angular app -->
+<html ng-app="exemploApp">
+<head>
+  <!-- SCROLLS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+  <!-- SPELLS -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+  <!-- Módulo Angularjs -->
+  <script src="app.js"></script>
+  <!-- Rotas com ngRoute -->
+  <script src="routes.js"></script>
+  <!--  Controllers da aplicação -->
+  <script src="controllers/HomeController.js"></script>
+  <script src="controllers/SobreController.js"></script>
+  <script src="controllers/ContatoController.js"></script>
+  
+</head>
+<!-- define angular controller -->
+<body ng-controller="homeController">
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">SP Angular 1.2 Exemplo</a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#sobre"><i class="fa fa-shield"></i> Sobre</a></li>
+        <li><a href="#contato"><i class="fa fa-comment"></i> Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="main">
+  
+    <!-- angular templating -->
+		<!-- Views injetadas -->
+    <div ng-view></div>
+    
+  </div>
+  
+  <footer class="text-center">
+    <small>Footer</small>
+  </footer>
+</body>
+
+</html>
+
+route.js:
+exemploApp.config(function($routeProvider) {
+  $routeProvider
+  .when('/', {
+  	  templateUrl: '/public/home.html',
+  	  controller: 'homeController'
+  })
+  .when('/sobre', {
+  	templateUrl: '/public/sobre.html',
+  	controller: 'sobreController'
+  })
+  .when('/contato', {
+  	templateUrl: '/public/contato.html',
+  	controller: 'contatoController'
+  });
+
+});
+
+contantoController.js:
+exemploApp.controller('contatoController', function($scope) {
+	// Criando uma menssagem para exibir na página de contato
+	$scope.message = 'Olá, estamos na página de contato :)';
+})
+
+homecontroller.js:
+exemploApp.controller('homeController', function($scope) {
+  // Criando uma menssagem para ser exibida na view
+  $scope.message = 'Olá, estamos na tela inicial';
+})
+
+sobreCOntroller.js:
+exemploApp.controller('sobreController', function($scope) {
+	$scope.message = 'Olá, estamos acessando o SOBRE da página.';
+});
+
+contanto.html:
+<div class="jumbotron text-center">
+	<h1>Nosso contato</h1>
+	
+	<p>{{ message }}</p>
+</div>
+
+home.html:
+<div class="jumbotron text-center">
+	<h1>Página inicial</h1>
+	
+	<p>{{ message }}</p>
+</div>
+
+sobre.html
+<div class="jumbotron text-center">
+	<h1>Sobre nossa página :)</h1>
+	
+	<p>{{ message }}</p>
+</div>
